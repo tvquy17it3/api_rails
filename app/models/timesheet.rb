@@ -1,0 +1,2 @@
+class Timesheet < ApplicationRecord
+end

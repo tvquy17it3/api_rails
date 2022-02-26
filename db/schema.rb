@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_22_141030) do
+ActiveRecord::Schema.define(version: 2022_02_26_082937) do
 
   create_table "contacts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "phone"
     t.string "address"
     t.string "gender"
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id"
     t.index ["user_id"], name: "index_contacts_on_user_id"
   end
 
@@ -29,6 +29,50 @@ ActiveRecord::Schema.define(version: 2022_02_22_141030) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["slug"], name: "index_roles_on_slug", unique: true
+  end
+
+  create_table "shifts", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name"
+    t.time "check_in", null: false
+    t.time "check_out", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["check_in"], name: "index_shifts_on_check_in"
+    t.index ["check_out"], name: "index_shifts_on_check_out"
+  end
+
+  create_table "timesheet_details", charset: "utf8mb3", force: :cascade do |t|
+    t.string "latitude"
+    t.string "longitude"
+    t.integer "distance"
+    t.decimal "accuracy", precision: 10
+    t.string "ip_address"
+    t.text "img"
+    t.decimal "confidence", precision: 10
+    t.text "note"
+    t.integer "starus"
+    t.bigint "timesheet_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["timesheet_id"], name: "index_timesheet_details_on_timesheet_id"
+  end
+
+  create_table "timesheets", charset: "utf8mb3", force: :cascade do |t|
+    t.datetime "check_in"
+    t.datetime "check_out"
+    t.string "location"
+    t.integer "hours"
+    t.integer "late"
+    t.integer "status"
+    t.text "note"
+    t.bigint "user_id", null: false
+    t.bigint "shift_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["check_in"], name: "index_timesheets_on_check_in"
+    t.index ["check_out"], name: "index_timesheets_on_check_out"
+    t.index ["shift_id"], name: "index_timesheets_on_shift_id"
+    t.index ["user_id"], name: "index_timesheets_on_user_id"
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
@@ -52,4 +96,8 @@ ActiveRecord::Schema.define(version: 2022_02_22_141030) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  add_foreign_key "contacts", "users"
+  add_foreign_key "timesheet_details", "timesheets"
+  add_foreign_key "timesheets", "shifts"
+  add_foreign_key "timesheets", "users"
 end

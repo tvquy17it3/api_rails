@@ -15,8 +15,8 @@ class Api::V1::UserController < Api::V1::AuthController
   end
 
   def change_password
-    if @current_user.valid_password? user_params[:old_password]
-      @current_user.password = (user_params[:new_password])
+    if @current_user.valid_password? user_params[:current_password]
+      @current_user.password = (user_params[:password])
       if @current_user.save
         render json: {message: "Changed password completed", user: @current_user}, status: 200
       else
@@ -30,6 +30,6 @@ class Api::V1::UserController < Api::V1::AuthController
 
   private
   def user_params
-    params.require(:user).permit(:old_password, :new_password, contact_attributes: [:name, :phone, :gender, :address])
+    params.require(:user).permit(:current_password, :password, contact_attributes: [:name, :phone, :gender, :address])
   end
 end
