@@ -2,7 +2,8 @@ class Api::V1::UserController < Api::V1::AuthController
   before_action :ensure_params_exist, except: :show
 
   def show
-    render json: {message: "Infor user", user: @current_user}, status: 200
+    user = User.includes(:contact).find_by(id: @current_user.id).as_json(include: :contact)
+    render json: {message: "Infor user", user: user}, status: 200
   end
 
   def update

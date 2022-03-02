@@ -9,7 +9,7 @@ class CreateTimesheetDetails < ActiveRecord::Migration[6.1]
       t.text :img
       t.decimal :confidence
       t.text :note
-      t.integer :starus
+      t.integer :status
       t.references :timesheet, null: false, foreign_key: true, index: true
 
       t.timestamps

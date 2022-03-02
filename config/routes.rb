@@ -9,6 +9,10 @@ Rails.application.routes.draw do
         get "show", :to => 'user#show'
         post "update", :to => 'user#update'
         post "change_password", :to => 'user#change_password'
+        resources :timesheets, only: %i(show create) do
+            get 'list', on: :collection
+        end
+        get 'timesheet-details/:id', :to => 'timesheets#details'
       end
     end
   end
