@@ -1,0 +1,45 @@
+<% provide :title, "Manager Accounts" %>
+<div class="page-info">
+  <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Users</li>
+      </ol>
+  </nav>
+  <div class="page-options">
+      <%= link_to 'Banned', banned_admin_users_path, class: "btn btn-secondary" %>
+      <%= link_to 'Active', admin_users_path, class: "btn btn-primary" %>
+  </div>
+</div>
+<div class="main-wrapper">
+  <div class="row stats-row">
+    <div class="col-xl">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Table Head Options</h5>
+          <p>
+            Use the modifier classes <code>.thead-light</code> or
+            <code>.thead-dark</code> to make <code>&lt;thead&gt;</code>s appear
+            light or dark gray.
+          </p>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+                <th scope="col">Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Address</th>
+                <th scope="col">Ban/Unban</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render @users %>
+            </tbody>
+          </table>
+          <%= paginate @users %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

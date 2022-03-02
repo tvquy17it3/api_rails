@@ -1,0 +1,58 @@
+<div class="img js-fullheight" style="background-image: url(/assets/images/bg.jpg);">
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section">Login</h2>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-lg-4">
+					<div class="login-wrap p-0">
+		      	<h3 class="mb-4 text-center">Have an account?</h3>
+
+						<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+							<% flash.each do |message_type, message| %>
+								<div class="alert alert-danger"><%= message %></div>
+							<% end %>
+							<div class="signin-form">
+								<div class="form-group">
+									<%= f.email_field :email ,class: "form-control", placeholder: "Email",
+									 		autocomplete: "email", :required => true %>
+								</div>
+								<div class="form-group">
+									<%= f.password_field :password, class: "form-control", placeholder: "Password",
+									autocomplete: "current-password", :required => true %>
+								</div>
+								<div class="form-group">
+									<%= f.submit "Log in", class: "form-control btn btn-primary submit px-3" %>
+								</div>
+
+								<div class="form-group d-md-flex">
+									<div class="w-50">
+										<% if devise_mapping.rememberable? %>
+												<%= f.label :remember_me, class: "checkbox-wrap checkbox-primary" do %>
+													<%= f.check_box :remember_me %>
+													<span class="checkmark"></span>Remember Me
+												<% end %>
+										<% end %>
+									</div>
+									<div class="w-50 text-md-right">
+										<a href="#" style="color: #fff">Forgot Password</a>
+									</div>
+								</div>
+							</div>
+						<% end %>
+
+						<%= render "devise/shared/links" %>
+	          <p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p>
+	          <div class="social d-flex text-center">
+	          	<a href="#" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> Facebook</a>
+	          	<a href="#" class="px-2 py-2 ml-md-1 rounded"><span class="ion-logo-twitter mr-2"></span> Twitter</a>
+	          </div>
+		      </div>
+				</div>
+			</div>
+		</div>
+	</section>
+<div/>

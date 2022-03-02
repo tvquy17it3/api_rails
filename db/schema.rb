@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_26_133541) do
+ActiveRecord::Schema.define(version: 2022_03_04_140711) do
 
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 2022_02_26_133541) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_contacts_on_deleted_at"
     t.index ["user_id"], name: "index_contacts_on_user_id"
   end
 
@@ -56,6 +58,8 @@ ActiveRecord::Schema.define(version: 2022_02_26_133541) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_roles_on_deleted_at"
     t.index ["slug"], name: "index_roles_on_slug", unique: true
   end
 
@@ -65,8 +69,10 @@ ActiveRecord::Schema.define(version: 2022_02_26_133541) do
     t.time "check_out", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
     t.index ["check_in"], name: "index_shifts_on_check_in"
     t.index ["check_out"], name: "index_shifts_on_check_out"
+    t.index ["deleted_at"], name: "index_shifts_on_deleted_at"
   end
 
   create_table "timesheet_details", charset: "utf8mb3", force: :cascade do |t|
@@ -78,10 +84,12 @@ ActiveRecord::Schema.define(version: 2022_02_26_133541) do
     t.text "img"
     t.decimal "confidence", precision: 10
     t.text "note"
-    t.integer "status"
+    t.integer "starus"
     t.bigint "timesheet_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_timesheet_details_on_deleted_at"
     t.index ["timesheet_id"], name: "index_timesheet_details_on_timesheet_id"
   end
 
@@ -97,8 +105,10 @@ ActiveRecord::Schema.define(version: 2022_02_26_133541) do
     t.bigint "shift_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
     t.index ["check_in"], name: "index_timesheets_on_check_in"
     t.index ["check_out"], name: "index_timesheets_on_check_out"
+    t.index ["deleted_at"], name: "index_timesheets_on_deleted_at"
     t.index ["shift_id"], name: "index_timesheets_on_shift_id"
     t.index ["user_id"], name: "index_timesheets_on_user_id"
   end
@@ -118,7 +128,9 @@ ActiveRecord::Schema.define(version: 2022_02_26_133541) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "role_id"
     t.string "authentication_token", limit: 30
+    t.datetime "deleted_at"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
+    t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["role_id"], name: "index_users_on_role_id"

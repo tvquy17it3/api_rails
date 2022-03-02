@@ -1,7 +1,16 @@
 class Api::V1::TimesheetsController < Api::V1::AuthController
-  before_action :load_timesheet, only: :show
+  before_action :load_timesheet, only: %i(show soft_delete)
   before_action :load_timesheet_details, only: :details
   before_action :check_exist_timesheet, only: :create
+
+
+  def soft_delete
+    if @timesheet.destroy
+      render json: {message: "Deleted"}, status: 200
+    else
+      render json: {message: "Error"}, status: 401
+    end
+  end
 
   def show
     render json: {message: "ok", timesheet: @timesheet}, status: 200
@@ -20,8 +29,8 @@ class Api::V1::TimesheetsController < Api::V1::AuthController
     if @timesheet
       ActiveRecord::Base.transaction do
         ts = @timesheet
-        ts.status = 1
-        ts.check_out = Time.current
+        ts.status_checkout!
+        ts.hours = work_hours(ts.check_in)
         ts.timesheet_details.build timesheet_detail_params
         ts.save
         render json: {message: "Updated", timesheet: ts}, status: 201
@@ -40,10 +49,8 @@ class Api::V1::TimesheetsController < Api::V1::AuthController
 
   private
   def timesheet_params
-    time = Time.current
     params.require(:timesheet)
-          .permit(:location, :hours, :late, :note, :user_id, :shift_id)
-          .merge(check_in: time, check_out: time, status: 0)
+          .permit(:location, :late, :note, :user_id, :shift_id)
   end
 
   def timesheet_detail_params
@@ -53,9 +60,7 @@ class Api::V1::TimesheetsController < Api::V1::AuthController
   end
 
   def load_timesheet
-    @timesheet = Timesheet.includes(:user)
-                          .find_by(id: params[:id])
-                          .as_json(include: :user)
+    @timesheet = Timesheet.find_by(id: params[:id])
     return if @timesheet
 
     render json: {message: "Not found!"}, status: 200
@@ -64,15 +69,17 @@ class Api::V1::TimesheetsController < Api::V1::AuthController
   def load_timesheet_details
     @timesheet = Timesheet.includes(:user, :timesheet_details)
                           .find_by(id: params[:id])
-                          .as_json(include: [:user, :timesheet_details])
+                          .as_json(include: %i(user timesheet_details))
     return if @timesheet
 
     render json: {message: "Not found!"}, status: 200
   end
 
   def check_exist_timesheet
-    @timesheet = Timesheet.where(check_in: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
-                          .where(user_id: @current_user.id)
-                          .first
+    @timesheet = Timesheet.with_checkin_today(@current_user.id).first
+  end
+
+  def work_hours check_in
+    TimeDifference.between(check_in, Time.current).in_hours
   end
 end

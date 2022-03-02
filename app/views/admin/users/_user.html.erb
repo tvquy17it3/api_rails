@@ -1,0 +1,23 @@
+<tr id="selectUser<%= user.id %>">
+  <th scope="row"><%= @stt+=1 %></th>
+  <td><%= user.email %></td>
+  <td><%= user.contact_name %></td>
+  <td><%= user.contact_phone %></td>
+  <td><%= user.contact_address %></td>
+  <td>
+    <% if user.deleted_at? %>
+      <%= link_to unbanned_admin_user_path(user.id), method: :put, remote: true, data: { confirm: "Are you sure?" } do %>
+        <button type="button" class="btn btn-danger btn-sm">
+          <span class="material-icons-outlined">undo</span>
+        </button>
+      <% end %>
+    <% else %>
+      <%= link_to admin_user_path(user.id), method: :delete, remote: true, data: { confirm: "Are you sure?" } do %>
+        <button type="button" class="btn btn-danger btn-sm">
+          <span class="material-icons-outlined">remove_circle</span>
+        </button>
+      <% end %>
+    <% end %>
+  </td>
+</tr>
+<!-- https://ichi.pro/vi/lenh-goi-ajax-trong-rails-xoa-cac-thao-tac-ma-khong-can-tai-lai-trang-161970761546189 -->

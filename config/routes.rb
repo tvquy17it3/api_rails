@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: "users/registrations"
+  }
   namespace :api do
     namespace :v1 do
       devise_scope :user do
@@ -13,7 +15,14 @@ Rails.application.routes.draw do
             get 'list', on: :collection
         end
         get 'timesheet-details/:id', :to => 'timesheets#details'
+        delete "timesheets/:id", :to => 'timesheets#soft_delete'
       end
+    end
+  end
+  namespace :admin do
+    resources :users , only: %i(index show destroy) do
+      get 'banned', on: :collection
+      put 'unbanned', on: :member
     end
   end
 end
