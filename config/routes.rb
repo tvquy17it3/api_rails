@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     resources :users , only: %i(index show destroy) do
       get 'banned', on: :collection
       put 'unbanned', on: :member
+      get 'search', on: :collection
     end
   end
 end
