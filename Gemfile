@@ -9,6 +9,7 @@ gem "devise"
 gem "simple_token_authentication"
 gem "active_storage_validations", "0.8.2"
 gem "kaminari"
+gem "time_difference"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.4'
