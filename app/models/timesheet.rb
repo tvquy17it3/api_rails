@@ -1,7 +1,8 @@
 class Timesheet < ApplicationRecord
   before_create :create_check_in
   belongs_to :user
-  has_many :timesheet_details, dependent: :destroy
+  has_many :timesheet_details, -> { with_deleted }, dependent: :destroy
+  acts_as_paranoid
 
   scope :with_checkin_today, ->(id) {
     where(check_in: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)

@@ -1,7 +1,16 @@
 class Api::V1::TimesheetsController < Api::V1::AuthController
-  before_action :load_timesheet, only: :show
+  before_action :load_timesheet, only: %i(show soft_delete)
   before_action :load_timesheet_details, only: :details
   before_action :check_exist_timesheet, only: :create
+
+
+  def soft_delete
+    if @timesheet.destroy
+      render json: {message: "Deleted"}, status: 200
+    else
+      render json: {message: "Error"}, status: 401
+    end
+  end
 
   def show
     render json: {message: "ok", timesheet: @timesheet}, status: 200
@@ -51,9 +60,7 @@ class Api::V1::TimesheetsController < Api::V1::AuthController
   end
 
   def load_timesheet
-    @timesheet = Timesheet.includes(:user)
-                          .find_by(id: params[:id])
-                          .as_json(include: :user)
+    @timesheet = Timesheet.find_by(id: params[:id])
     return if @timesheet
 
     render json: {message: "Not found!"}, status: 200

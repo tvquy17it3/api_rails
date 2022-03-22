@@ -13,7 +13,11 @@ Rails.application.routes.draw do
             get 'list', on: :collection
         end
         get 'timesheet-details/:id', :to => 'timesheets#details'
+        delete "timesheets/:id", :to => 'timesheets#soft_delete'
       end
     end
+  end
+  namespace :admin do
+    resources :users
   end
 end
