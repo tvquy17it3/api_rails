@@ -1,0 +1,7 @@
+let select<%= @user.id %> = document.querySelector("#selectUser" + <%= @user.id %>);
+select<%= @user.id %>.remove();
+<% flash.each do |type, message| %>
+     <% type = 'success' if type == 'notice' %>
+     <% type = 'error'   if type == 'alert' %>
+     toastr.<%= type %>("<%= message%>");
+<% end %>
