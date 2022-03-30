@@ -1,0 +1,3 @@
+$("#users-table").hide();
+$("#search-results").html("<%= escape_javascript(render partial: 'results') %>");
+$("#paginator").html("<%= j paginate(@users, remote: true) %>");

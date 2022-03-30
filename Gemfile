@@ -11,8 +11,9 @@ gem "active_storage_validations", "0.8.2"
 gem "kaminari"
 gem "time_difference"
 gem "paranoia", "~> 2.2"
-gem 'kaminari'
-gem 'bootstrap-kaminari-views'
+gem "kaminari"
+gem "bootstrap-kaminari-views"
+gem "ransack"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.4'

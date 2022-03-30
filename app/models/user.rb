@@ -8,10 +8,11 @@ class User < ApplicationRecord
   acts_as_paranoid
   delegate :name, :phone, :address, :gender,
   to: :contact, prefix: true, allow_nil: true
+  delegate :slug, to: :role, prefix: true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
-  scope :with_contact, -> { includes(:contact).order('email ASC') }
+  scope :with_contact_role, -> { includes(:contact, :role) }
 end

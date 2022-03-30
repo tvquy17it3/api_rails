@@ -1,4 +1,15 @@
 <% provide :title, "Manager Accounts" %>
+<% content_for :navbarsearch do %>
+  <div class="navbar-search">
+    <%= search_form_for @q, url: search_admin_users_path, remote: true do |f| %>
+      <div class="form-group">
+        <%= f.search_field :contact_name_or_contact_phone_or_email_cont, :id => 'nav-search', placeholder: 'Search' %>
+        <!-- <% f.submit %> -->
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
 <div class="page-info">
   <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -17,12 +28,12 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Table Head Options</h5>
-          <p>
+          <!-- <p>
             Use the modifier classes <code>.thead-light</code> or
             <code>.thead-dark</code> to make <code>&lt;thead&gt;</code>s appear
             light or dark gray.
-          </p>
-          <table class="table">
+          </p> -->
+          <table class="table" id="users-table">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
@@ -30,14 +41,18 @@
                 <th scope="col">Name</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Address</th>
+                <th scope="col">Role</th>
                 <th scope="col">Ban/Unban</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="users">
               <%= render @users %>
             </tbody>
           </table>
-          <%= paginate @users %>
+          <div id="search-results"></div>
+          <div id="paginator">
+            <%= paginate @users, remote: true %>
+          </div>
         </div>
       </div>
     </div>
