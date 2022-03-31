@@ -1,7 +1,8 @@
 class Timesheet < ApplicationRecord
   before_create :create_check_in
   belongs_to :user
-  has_many :timesheet_details, -> { with_deleted }, dependent: :destroy
+  has_many :timesheet_details, -> { with_deleted }
+  # validates_associated :timesheet_details
   acts_as_paranoid
 
   scope :with_checkin_today, ->(id) {
