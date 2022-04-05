@@ -36,8 +36,9 @@
                         <li class="sidebar-title">
                             Apps
                         </li>
-                        <li class="active-page">
-                            <a href="" class="active"><i class="material-icons-outlined">dashboard</i>Dashboard</a>
+                        <li>
+                            <!-- class="active-page" class="active" -->
+                            <a href=""><i class="material-icons-outlined">dashboard</i>Dashboard</a>
                         </li>
                         <li>
                             <a href=""><i class="material-icons-outlined">inbox</i>Mailbox</a>
@@ -46,7 +47,9 @@
                             <a href="profile.html"><i class="material-icons-outlined">account_circle</i>Profile</a>
                         </li>
                         <li>
-                            <a href=""><i class="material-icons-outlined">calendar_today</i>Calendar</a>
+                            <%= link_to admin_timesheets_path, method: :get do %>
+                                <i class="material-icons-outlined">calendar_today</i>Calendar
+                            <% end %>
                         </li>
                         <li>
                             <a href="todo.html"><i class="material-icons">done</i>Todo</a>

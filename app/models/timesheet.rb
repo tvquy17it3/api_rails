@@ -1,9 +1,14 @@
 class Timesheet < ApplicationRecord
   before_create :create_check_in
   belongs_to :user
+  belongs_to :shift
   has_many :timesheet_details, -> { with_deleted }
+  has_one :contact, through: :user
   # validates_associated :timesheet_details
   acts_as_paranoid
+  delegate :email, to: :user, prefix: true
+  delegate :name, to: :shift, prefix: true, allow_nil: true
+  delegate :name, to: :contact, prefix: true, allow_nil: true
 
   scope :with_checkin_today, ->(id) {
     where(check_in: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)

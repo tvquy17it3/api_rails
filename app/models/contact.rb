@@ -3,7 +3,7 @@ class Contact < ApplicationRecord
   validates :name, presence: true, length:
     {
       minimum: 3,
-      maximum: 100
+      maximum: 50
     }
   validates :phone,:presence => true, :numericality => true,
     :length => { :minimum => 5, :maximum => 15 }, allow_nil: true

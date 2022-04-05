@@ -1,0 +1,10 @@
+var select<%= @timesheet.id %> = document.querySelector("#selectTimesheet<%= @timesheet.id %>");
+<% flash.each do |type, message| %>
+     <% type = 'success' if type == 'notice' %>
+     <% type = 'error'   if type == 'alert' %>
+     <% type = 'error'   if type == 'danger' %>
+     <% if type != 'error'%>
+       select<%= @timesheet.id %>.remove();
+     <% end %>
+     toastr.<%= type %>("<%= message %>");
+<% end %>
