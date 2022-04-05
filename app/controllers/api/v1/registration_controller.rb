@@ -1,5 +1,6 @@
 class Api::V1::RegistrationController < Devise::RegistrationsController
   before_action :ensure_params_exist
+  skip_before_action :verify_authenticity_token
   respond_to :json
 
   def create
@@ -14,8 +15,10 @@ class Api::V1::RegistrationController < Devise::RegistrationsController
 
   private
   def user_params
-    role = Role.role_user.first
-    params.require(:user).permit(:email, :password, :password_confirmation, contact_attributes: [:name, :phone, :gender, :address]).reverse_merge({ role_id: role.id })
+    role = Role.user_role.first
+    params.require(:user).permit(:email, :password, :password_confirmation,
+      contact_attributes: [:name, :phone, :gender, :address])
+      .reverse_merge({ role_id: role.id })
   end
 
   def ensure_params_exist

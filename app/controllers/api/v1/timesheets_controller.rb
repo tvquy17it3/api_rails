@@ -1,8 +1,9 @@
 class Api::V1::TimesheetsController < Api::V1::AuthController
   before_action :load_timesheet, only: %i(show soft_delete)
   before_action :load_timesheet_details, only: :details
-  before_action :check_exist_timesheet, only: :create
-
+  before_action :check_exist_timesheet, :ensure_params_exist, only: :create
+  # respond_to :json
+  load_and_authorize_resource
 
   def soft_delete
     if @timesheet.destroy
@@ -16,7 +17,7 @@ class Api::V1::TimesheetsController < Api::V1::AuthController
     render json: {message: "ok", timesheet: @timesheet}, status: 200
   end
 
-  def details
+  def detail
     render json: {message: "ok", timesheet: @timesheet}, status: 200
   end
 
@@ -32,19 +33,19 @@ class Api::V1::TimesheetsController < Api::V1::AuthController
         ts.status_checkout!
         ts.hours = work_hours(ts.check_in)
         ts.timesheet_details.build timesheet_detail_params
-        ts.save
+        ts.save!
         render json: {message: "Updated", timesheet: ts}, status: 201
       end
     else
       ActiveRecord::Base.transaction do
-        ts = @current_user.timesheets.build timesheet_params
+        ts = @current_user.timesheets.create! timesheet_params
         ts.timesheet_details.build timesheet_detail_params
         ts.save!
         render json: {message: "Created", timesheet: ts}, status: 201
       end
     end
   rescue ActiveRecord::RecordInvalid => invalid
-    render json: {message: invalid.record.errors}, status: 401
+    render json: { message: invalid.record.errors.full_messages }, status: 422
   end
 
   private
@@ -59,6 +60,11 @@ class Api::V1::TimesheetsController < Api::V1::AuthController
                   :ip_address, :confidence, :image, :note)
   end
 
+  def ensure_params_exist
+    return unless params[:timesheet_detail].blank?
+    render json: {message: "Missing params"}, status: 422
+  end
+
   def load_timesheet
     @timesheet = Timesheet.find_by(id: params[:id])
     return if @timesheet
@@ -71,7 +77,6 @@ class Api::V1::TimesheetsController < Api::V1::AuthController
                           .find_by(id: params[:id])
                           .as_json(include: %i(user timesheet_details))
     return if @timesheet
-
     render json: {message: "Not found!"}, status: 200
   end
 
