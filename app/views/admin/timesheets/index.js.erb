@@ -1,0 +1,2 @@
+$("#timesheets").html("<%= j render(@timesheets) %>");
+$("#paginator").html("<%= j paginate(@timesheets, remote: true) %>");

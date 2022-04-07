@@ -1,0 +1,49 @@
+<div class="page-info">
+  <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Timesheets</li>
+      </ol>
+  </nav>
+  <div class="page-options">
+      <%= link_to 'Banned', banned_admin_users_path, class: "btn btn-secondary" %>
+      <%= link_to 'Active', admin_users_path, class: "btn btn-primary" %>
+  </div>
+</div>
+<div class="main-wrapper">
+  <div class="row stats-row">
+    <div class="col-xl">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Table Head Options</h5>
+          <!-- <p>
+            Use the modifier classes <code>.thead-light</code> or
+            <code>.thead-dark</code> to make <code>&lt;thead&gt;</code>s appear
+            light or dark gray.
+          </p> -->
+          <table class="table" id="timesheets-table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Check in</th>
+                <th scope="col">Check out</th>
+                <th scope="col">shift</th>
+                <th scope="col">Edit/Delete</th>
+              </tr>
+            </thead>
+            <tbody id="timesheets">
+              <%= render @timesheets %>
+            </tbody>
+          </table>
+          <div id="search-results"></div>
+          <div id="paginator">
+            <%= paginate @timesheets, remote: true %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modal-timesheets"></div>
