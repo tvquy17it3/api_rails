@@ -4,7 +4,7 @@
     <%= search_form_for @q, url: search_admin_users_path, remote: true do |f| %>
       <div class="form-group">
         <%= f.search_field :contact_name_or_contact_phone_or_email_cont, :id => 'nav-search', placeholder: 'Search' %>
-        <!-- <% f.submit %> -->
+        <!-- <%= f.submit "save creature", class: "btn btn-default"%> -->
       </div>
     <% end %>
   </div>

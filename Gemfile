@@ -20,6 +20,7 @@ gem 'omniauth'
 gem "omniauth-rails_csrf_protection"
 gem 'omniauth-google-oauth2'
 # gem 'google-api-client', require: 'google/api_client'
+gem 'invisible_captcha'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.4'
