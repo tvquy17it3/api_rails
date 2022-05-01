@@ -1,14 +1,10 @@
 <div class="page-info">
   <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Timesheets</li>
+        <li class="breadcrumb-item"><a href="#"><%= t "admin.users.dashboard" %></a></li>
+        <li class="breadcrumb-item active" aria-current="page"><%= t "timesheets.timesheet" %></li>
       </ol>
   </nav>
-  <div class="page-options">
-      <%= link_to 'Banned', banned_admin_users_path, class: "btn btn-secondary" %>
-      <%= link_to 'Active', admin_users_path, class: "btn btn-primary" %>
-  </div>
 </div>
 <div class="main-wrapper">
   <div class="row stats-row">
@@ -25,12 +21,12 @@
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Check in</th>
-                <th scope="col">Check out</th>
-                <th scope="col">shift</th>
-                <th scope="col">Edit/Delete</th>
+                <th scope="col"><%= t "timesheets.name" %></th>
+                <th scope="col"><%= t "timesheets.email" %></th>
+                <th scope="col"><%= t "timesheets.checkin" %></th>
+                <th scope="col"><%= t "timesheets.checkout" %></th>
+                <th scope="col"><%= t "timesheets.shift" %></th>
+                <th scope="col"><%= t "edit" %>/<%= t "delete" %></th>
               </tr>
             </thead>
             <tbody id="timesheets">

@@ -13,13 +13,13 @@
 <div class="page-info">
   <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Users</li>
+          <li class="breadcrumb-item"><a href="#"><%= t "admin.users.dashboard" %></a></li>
+          <li class="breadcrumb-item active" aria-current="page"><%= t "users.account" %></li>
       </ol>
   </nav>
   <div class="page-options">
-      <%= link_to 'Banned', banned_admin_users_path, class: "btn btn-secondary" %>
-      <%= link_to 'Active', admin_users_path, class: "btn btn-primary" %>
+      <%= link_to t("users.banned"), banned_admin_users_path, class: "btn btn-secondary" %>
+      <%= link_to t("users.active"), admin_users_path, class: "btn btn-primary" %>
   </div>
 </div>
 <div class="main-wrapper">
@@ -37,12 +37,12 @@
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Email</th>
-                <th scope="col">Name</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Address</th>
-                <th scope="col">Role</th>
-                <th scope="col">Ban/Unban</th>
+                <th scope="col"><%= t "users.email" %></th>
+                <th scope="col"><%= t "users.name" %></th>
+                <th scope="col"><%= t "users.phone" %></th>
+                <th scope="col"><%= t "users.address" %></th>
+                <th scope="col"><%= t "users.role" %></th>
+                <th scope="col"><%= t "users.ban" %>/<%= t "users.unban" %></th>
               </tr>
             </thead>
             <tbody id="users">

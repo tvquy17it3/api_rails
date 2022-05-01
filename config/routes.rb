@@ -1,12 +1,23 @@
 Rails.application.routes.draw do
-  devise_scope :user do
-    root to: "devise/sessions#new"
-  end
   devise_for :users, controllers: {
     registrations: "users/registrations",
     sessions: "users/sessions",
     omniauth_callbacks: "users/omniauth_callbacks"
   }
+  scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
+    devise_scope :user do
+      root to: "devise/sessions#new"
+    end
+    namespace :admin do
+      resources :users, except: %(create new edit) do
+        get "banned", on: :collection
+        put "unbanned", on: :member
+        get "search", on: :collection
+        get "modal_role", on: :member
+      end
+      resources :timesheets, except: %(create new edit)
+    end
+  end
   namespace :api do
     namespace :v1 do
       devise_scope :user do
@@ -23,14 +34,5 @@ Rails.application.routes.draw do
         delete "timesheets/:id", :to => "timesheets#soft_delete"
       end
     end
-  end
-  namespace :admin do
-    resources :users, except: %(create new edit) do
-      get "banned", on: :collection
-      put "unbanned", on: :member
-      get "search", on: :collection
-      get "modal_role", on: :member
-    end
-    resources :timesheets, except: %(create new edit)
   end
 end

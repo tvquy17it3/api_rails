@@ -6,7 +6,7 @@
   <td><%= timesheet.check_out %></td>
   <td><%= timesheet.shift_name %></td>
   <td>
-    <%= link_to admin_timesheet_path(timesheet), method: :delete, remote: true, data: { confirm: "Are you sure ban?" } do %>
+    <%= link_to admin_timesheet_path(timesheet), method: :delete, remote: true, data: { confirm: t("you_sure") } do %>
       <button type="button" class="btn btn-danger btn-sm">
         <span class="material-icons">delete_forever</span>
       </button>

@@ -20,6 +20,7 @@
         <!-- Theme Styles -->
         <link href="/assets/css/connect.min.css" rel="stylesheet">
         <link href="/assets/css/admin3.css" rel="stylesheet">
+        <script src="/assets/js/jquery-3.4.1.min.js"></script>
         <%= javascript_pack_tag "application", "data-turbolinks-track": "reload" %>
     </head>
     <body>
@@ -44,22 +45,22 @@
                             <a href=""><i class="material-icons-outlined">inbox</i>Mailbox</a>
                         </li>
                         <li>
-                            <a href="profile.html"><i class="material-icons-outlined">account_circle</i>Profile</a>
+                            <a href=""><i class="material-icons-outlined">account_circle</i>Profile</a>
                         </li>
                         <li>
                             <%= link_to admin_timesheets_path, method: :get do %>
-                                <i class="material-icons-outlined">calendar_today</i>Calendar
+                                <i class="material-icons-outlined">table_view</i><%= t "timesheets.timesheet" %>
                             <% end %>
                         </li>
                         <li>
-                            <a href="todo.html"><i class="material-icons">done</i>Todo</a>
+                            <a href=""><i class="material-icons">done</i>Todo</a>
                         </li>
                         <li class="sidebar-title">
                             UI Elements
                         </li>
 
                         <li>
-                            <a href="#"><i class="material-icons">card_giftcard</i>Extended<i class="material-icons has-sub-menu">add</i></a>
+                            <a href=""><i class="material-icons">card_giftcard</i>Extended<i class="material-icons has-sub-menu">add</i></a>
                             <ul class="sub-menu">
                                 <li>
                                     <a href="extended-select2.html">Select2</a>
@@ -67,10 +68,13 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="charts.html"><i class="material-icons">bar_chart</i>Charts</a>
+                            <%= link_to admin_users_path, method: :get do %>
+                                <i class="material-icons">account_box</i><%= t "users.user" %>
+                            <% end %>
+                            <!-- <a href="charts.html"><i class="material-icons">bar_chart</i>Charts</a> -->
                         </li>
                         <li>
-                            <a href="forms.html"><i class="material-icons">input</i>Forms</a>
+                            <a href=""><i class="material-icons">input</i>Forms</a>
                         </li>
                         <li class="sidebar-title">
                             Other
@@ -99,6 +103,9 @@
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="#">Settings &amp Privacy</a>
                                     <div class="dropdown-divider"></div>
+                                    <%= link_to t("vietnamese"), url_for(locale: :vi), class: "dropdown-item" %>
+                                    <%= link_to t("english"), url_for(locale: :en), class: "dropdown-item" %>
+                                    <div class="dropdown-divider"></div>
                                     <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
                                 </div>
                             </li>
@@ -126,7 +133,6 @@
         </div>
 
         <!-- Javascripts -->
-        <script src="/assets/js/jquery-3.4.1.min.js"></script>
         <script src="/assets/js/popper.min.js"></script>
         <script src="/assets/js/bootstrap.min.js"></script>
         <script src="/assets/js/jquery.slimscroll.min.js"></script>
