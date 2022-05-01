@@ -5,17 +5,18 @@
   <td><%= user.contact_phone %></td>
   <td><%= user.contact_address %></td>
   <td>
-    <%= button_to(user.role_slug, modal_role_admin_user_path(user), method: :get, remote: true, class: "btn btn-info btn-xs btn-block") %>
+    <%= button_to t("roles.#{user.role_slug}"), modal_role_admin_user_path(user), method: :get,
+        remote: true, id: "User#{user.id}", class: "btn btn-info btn-xs btn-block" %>
   </td>
   <td>
     <% if user.deleted_at? %>
-      <%= link_to unbanned_admin_user_path(user), method: :put, remote: true, data: { confirm: "Are you sure unban?" } do %>
+      <%= link_to unbanned_admin_user_path(user), method: :put, remote: true, data: { confirm: t("you_sure") } do %>
         <button type="button" class="btn btn-danger btn-sm">
           <span class="material-icons-outlined">undo</span>
         </button>
       <% end %>
     <% else %>
-      <%= link_to admin_user_path(user), method: :delete, remote: true, data: { confirm: "Are you sure ban?" } do %>
+      <%= link_to admin_user_path(user), method: :delete, remote: true, data: { confirm: t("you_sure") } do %>
         <button type="button" class="btn btn-danger btn-sm">
           <span class="material-icons-outlined">remove_circle</span>
         </button>

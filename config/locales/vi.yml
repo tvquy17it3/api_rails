@@ -1,0 +1,35 @@
+vi:
+  vietnamese: "Tiếng Việt"
+  english: "Tiếng Anh"
+  admin:
+    users:
+      dashboard: "Bảng điều khiển"
+  edit: "Sua"
+  delete: "Xoa"
+  you_sure: "Ban chac chan?"
+  save: "Luu"
+  close: "Dong"
+  users:
+    user: "Nguoi dung"
+    account: "Tai khoan"
+    email: "Email"
+    name: "Ten"
+    phone: "Dien thoai"
+    address: "Dia chi"
+    role: "Vai tro"
+    ban: "Ban"
+    unban: "Unban"
+    banned: "Da Khoa"
+    active: "Hoat dong"
+  timesheets:
+    timesheet: "Bang cham cong"
+    email: "Email"
+    name: "Ten"
+    checkin: "Check in"
+    checkout: "Check out"
+    shift: "Ca lam viec"
+  roles:
+    admin_role: "Admin"
+    manager_role: "Quan ly"
+    user_role: "Nguoi dung"
+    change_role: "Thay doi vai tro"

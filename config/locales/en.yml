@@ -1,33 +1,35 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  vietnamese: "Vietnamese"
+  english: "English"
+  admin:
+    users:
+      dashboard: "Dashboard"
+  edit: "Edit"
+  delete: "Delete"
+  you_sure: "Are you sure?"
+  save: "Save"
+  close: "Close"
+  users:
+    user: "User"
+    account: "Account"
+    email: "Email"
+    name: "Name"
+    phone: "Phone"
+    address: "Address"
+    role: "Role"
+    ban: "Ban"
+    unban: "Unban"
+    banned: "Banned"
+    active: "Active"
+  timesheets:
+    timesheet: "Timesheets"
+    email: "Email"
+    name: "Name"
+    checkin: "Check in"
+    checkout: "Check out"
+    shift: "Shift"
+  roles:
+    admin_role: "Admin"
+    manager_role: "Manager"
+    user_role: "User"
+    change_role: "Change role"

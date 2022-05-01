@@ -24,7 +24,11 @@ class User < ApplicationRecord
         user = User.create(email: access_token.info.email,
           password: Devise.friendly_token[0,20],
           role_id: role.id)
-        user.create_contact(name: access_token.info.name)
+        user.build_contact(name: access_token.info.name)
+        UserMailer.welcome(user).deliver
+      else
+        user.build_contact unless user.contact
+        user.contact.update(name: access_token.info.name)
       end
       user.uid = access_token.uid
       user.image = access_token.info.image
