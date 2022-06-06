@@ -33,3 +33,11 @@ vi:
     manager_role: "Quan ly"
     user_role: "Nguoi dung"
     change_role: "Thay doi vai tro"
+  signin:
+    have_an_account: "Ban da co tai khoan?"
+    password: "Mat khau"
+    login: "Dang nhap"
+    remember: "Ghi nho"
+    signup: "Dang ky"
+    orsignwith: "Hoac dang nhap voi"
+    forgot_password: "Quen mat khau?"

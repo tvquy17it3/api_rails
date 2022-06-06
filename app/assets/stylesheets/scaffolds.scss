@@ -1,7 +1,6 @@
-body {
-  background-color: #fff;
-  color: #333;
-  margin: 33px; }
+// body {
+//   background-color: #fff;
+//   color: #333; }
 
 body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
@@ -63,3 +62,20 @@ div.actions {
 
 label {
   display: block; }
+
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+.bg-sign{
+  background-image: url("/assets/images/bg.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

@@ -33,3 +33,11 @@ en:
     manager_role: "Manager"
     user_role: "User"
     change_role: "Change role"
+  signin:
+    have_an_account: "Have an account?"
+    password: "Password"
+    login: "Login"
+    remember: "Remember me"
+    signup: "Sign up"
+    orsignwith: "Or Sign In With"
+    forgot_password: "Forgot your password?"
