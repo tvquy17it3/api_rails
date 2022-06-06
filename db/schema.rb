@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2022_04_06_102153) do
 
   create_table "roles", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
-    t.string "slug"
+    t.string "slug", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 2022_04_06_102153) do
     t.text "img"
     t.decimal "confidence", precision: 10
     t.text "note"
-    t.integer "starus"
+    t.integer "status"
     t.bigint "timesheet_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
