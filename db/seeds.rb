@@ -1,12 +1,12 @@
 Role.create!([
-  {name: :admin, slug: :admin},
-  {name: :manager, slug: :manager},
-  {name: :user, slug: :user}]
+  {name: :admin, slug: "admin"},
+  {name: :manager, slug: "manager"},
+  {name: :user, slug: "user"}]
 )
 
-10.times do |n|
+5.times do |n|
   email = "test-#{rand(252...4350)}@branch.com"
-  password = "password123"
+  password = "password#{rand(2102...9350)}"
   name = Faker::Name.unique.name
   phone = Faker::PhoneNumber.phone_number
   address = Faker::Address.full_address
@@ -22,7 +22,12 @@ Role.create!([
                     phone: phone,
                     gender: gender,
                     address: address)
+  u.save!
 end
+
+passw = "abc@12345#{rand(252...4350)}"
+User.create!(email: "tvquy.17it3@vku.udn.vn", role_id: 1,
+             password: passw, password_confirmation: passw)
 
 Shift.create!([
   {name: "Morning", check_in: "07:30:00", check_out: "11:30:00"},

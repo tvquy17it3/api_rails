@@ -5,13 +5,13 @@ class Contact < ApplicationRecord
       minimum: 3,
       maximum: 50
     }
-  validates :phone,:presence => true, :numericality => true,
+  validates :phone, :presence => true,
     :length => { :minimum => 5, :maximum => 15 }, allow_nil: true
 
   validates :gender, length:
   {
     minimum: 1,
-    maximum: 1
+    maximum: 6
   }, allow_nil: true
 
   validates :address, length:
