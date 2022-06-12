@@ -1,7 +1,7 @@
 class TimesheetDetail < ApplicationRecord
+  acts_as_paranoid
   has_one_attached :image
   belongs_to :timesheet
-  acts_as_paranoid
 
   validates :distance, :accuracy, :confidence, :presence => true,
     :numericality => true, allow_nil: true

@@ -1,11 +1,11 @@
 class Timesheet < ApplicationRecord
+  acts_as_paranoid
   before_create :create_check_in
   belongs_to :user
   belongs_to :shift
   has_many :timesheet_details, -> { with_deleted }
   has_one :contact, through: :user
   # validates_associated :timesheet_details
-  acts_as_paranoid
   delegate :email, to: :user, prefix: true
   delegate :name, to: :shift, prefix: true, allow_nil: true
   delegate :name, to: :contact, prefix: true, allow_nil: true
